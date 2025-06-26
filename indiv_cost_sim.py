@@ -1,6 +1,7 @@
 from echo import Echo
 from tacet import TacetField
 import matplotlib.pyplot as plt
+import matplotlib.ticker as mticker
 from collections import defaultdict
 import time
 
@@ -160,12 +161,18 @@ def plot_combined(sim1: BaseSimulation, sim3: BaseSimulation) -> None:
     fig, axes = plt.subplots(1, 2, figsize=(14, 6), sharey=True)
     fig.patch.set_facecolor('#303030')
 
-    for ax, sim, cost_label in zip(axes, (sim1, sim3), ('Cost 1', 'Cost 3')):
+    for i, (ax, sim, cost_label) in enumerate(zip(axes, (sim1, sim3), ('Cost 1', 'Cost 3'))):
         sim.create_plot(ax)
         ax.set_title(f"Waveplate Costs vs Threshold ({cost_label})")
-        if ax == axes[0]:
-            ax.set_ylabel("Waveplate Cost", color="white")
+        ax.yaxis.set_major_locator(mticker.MaxNLocator(integer=False))
+        ax.tick_params(axis='both', colors="white")
         ax.grid(True, color="white", linestyle=':', linewidth=0.5)
+        ax.set_xlabel("Fodder Threshold", color="white")
+
+        if i == 0:
+            ax.set_ylabel("Waveplate Cost", color="white")
+        else:
+            ax.yaxis.set_tick_params(labelleft=True)
 
     plt.tight_layout()
 
