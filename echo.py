@@ -43,10 +43,13 @@ class Echo:
 
     # Initialize Echo object
     # :threshold: int - The number of substats by which the echo must have at least one crit stat to proceed
-    def __init__(self, threshold: int) -> None:
+    def __init__(self, mainstat=None, cost=None, set=None) -> None:
+        self.mainstat = mainstat
+        self.cost = cost
+        self.set = set
         self.substats = []
         self.dbl_crit = None
-        self.roll_substats(threshold)
+        
         return
     
     # Roll the substats for the Echo object
@@ -91,7 +94,8 @@ class Echo:
         return cost
     
     def __str__(self) -> str:
-        return f"Substats: {self.substats}"
+        rep = f"Set: {self.set}\n" + f"Cost: {self.cost}\n" + f"Mainstat: {self.mainstat}\n" + f"Substats: {self.substats}"
+        return rep
         
 
 
@@ -112,8 +116,8 @@ if __name__ == "__main__":
     xp, tuners, rolled = 0, 0, 0
     usable = []
     while len(usable) < 5:
-        echo = Echo(threshold)
-        # print(echo)
+        echo = Echo()
+        echo.roll_substats(threshold)
         if echo.dbl_crit:
             usable.append(echo)
 

@@ -1,4 +1,5 @@
 from echo import Echo
+from tacet import TacetField
 import matplotlib.pyplot as plt
 from collections import defaultdict
 import time
@@ -22,7 +23,8 @@ class Simulation:
             for _ in range(iterations):
                 xp, tuners, rolled, usable = 0, 0, 0, 0
                 while usable < 5:
-                    echo = Echo(threshold)
+                    echo = Echo()
+                    echo.roll_substats(threshold)
                     if echo.dbl_crit:
                         usable += 1
 
