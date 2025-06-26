@@ -190,7 +190,7 @@ def create_combined_table(sim1: BaseSimulation, sim3: BaseSimulation) -> None:
 if __name__ == "__main__":
     start_time = time.perf_counter()
 
-    iterations = 1000
+    iterations = 50000
     sim_1 = BaseSimulation(iterations, cost_filter=1)
     sim_3 = BaseSimulation(iterations, cost_filter=3)
     sim_1.compute_averages()
